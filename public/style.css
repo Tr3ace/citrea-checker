@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: rgb(236, 225, 225);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container {
+    background: rgb(235, 232, 232) (186, 134, 134) (254, 252, 252, 0.836);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.network-badge-wrapper {
+    text-align: center; /* Added a wrapper to keep the badge centered without inline style */
+    margin-bottom: 20px;
+}
+
+.network-badge {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    font-family: monospace;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    display: none;
+}
+
+.result.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.result-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.result-label {
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.error {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fee;
+    border-left: 4px solid #f44;
+    border-radius: 5px;
+    color: #c33;
+    display: none;
+}
+
+.error.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.config-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff9e6;
+    border-radius: 10px;
+    border-left: 4px solid #ffc107;
+}
+
+.config-section h3 {
+    font-size: 14px;
+    color: #856404;
+    margin-bottom: 10px;
+}
+
+.config-section input {
+    font-size: 13px;
+}
+footer {
+  margin-top: 50px;
+  text-align: left;
+  font-size: 14px;
+  color: black;
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  left: 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.twitter-link {
+  display: inline-flex;
+  align-items: left;
+  gap: 6px;
+  color: #1da1f2; /* Twitter blue */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.twitter-link:hover {
+  color: #fff; /* turns white */
+  text-shadow: 0 0 12px rgba(29, 161, 242, 0.8);
+  transform: translateY(-2px);
+}
+
+.twitter-icon {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.twitter-link:hover .twitter-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(29, 161, 242, 0.7));
+}
+
+footer span {
+  color: #d0e6ff;
+  font-size: 13px;
+}
+header {
+  display: flex;
+  align-items: left;
+  padding: 10px 20px;
+}
+
+.logo {
+  position: fixed;
+  top: 15px;   /* distance from the top of the window */
+  left: 20px;  /* distance from the left side */
+  z-index: 1000; /* keeps it above everything else */
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+  cursor: pointer;
+}

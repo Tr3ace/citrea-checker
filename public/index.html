@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrea Transaction Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+  <a href="index.html" class="logo">
+    <img src="asset/citrea.jpg" alt="My Project Logo">
+  </a>
+  
+</header>
+
+    <div class="container">
+        <h1> Transaction                Checker🔎</h1>
+        <p class="subtitle">Check wallet transaction count on Citrea Network</p>
+        
+        <span class="network-badge">Citrea Testnet</span> <br>
+        <br>
+
+        <div class="input-group">
+            <label for="walletAddress">Wallet Address</label>
+            <input 
+                type="text" 
+                id="walletAddress" 
+                placeholder="0x..."
+                value="">
+        </div>
+
+        <button id="checkBtn">Check Transactions</button>
+
+        
+
+        <div class="result" id="result">
+            <div class="result-title">Transaction Count</div>
+            <div class="result-value" id="txCount">0</div>
+            <div class="result-label">transactions on Citrea Testnet</div>
+        </div>
+
+        <div class="error" id="error"></div>
+    </div>
+
+   
+
+    <script>
+        const walletInput = document.getElementById('walletAddress');
+        const checkBtn = document.getElementById('checkBtn');
+        const resultDiv = document.getElementById('result');
+        const errorDiv = document.getElementById('error');
+        const txCountSpan = document.getElementById('txCount');
+
+        // Backend endpoint
+        const API_URL = '/api/transaction-count';
+
+        checkBtn.addEventListener('click', async () => {
+            const walletAddress = walletInput.value.trim();
+
+            // Hide previous results
+            resultDiv.classList.remove('show');
+            errorDiv.classList.remove('show');
+
+            if (!walletAddress) {
+                showError('Please enter a wallet address');
+                return;
+            }
+
+            if (!walletAddress.startsWith('0x') || walletAddress.length !== 42) {
+                showError('Please enter a valid Ethereum address');
+                return;
+            }
+
+            checkBtn.disabled = true;
+            checkBtn.innerHTML = 'Checking<span class="loading"></span>';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ walletAddress })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || data.error) {
+                    throw new Error(data.error || 'Request failed');
+                }
+
+                txCountSpan.textContent = data.transactionCount;
+                resultDiv.classList.add('show');
+
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            } finally {
+                checkBtn.disabled = false;
+                checkBtn.innerHTML = 'Check Transactions';
+            }
+        });
+
+        function showError(message) {
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        walletInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkBtn.click();
+        });
+    </script>
+    </body>
+    <br>
+   <footer>
+  Built by 
+  <a href="https://twitter.com/3_Ace__" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     class="twitter-link" 
+     title="Visit my Twitter profile">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" class="twitter-icon" aria-hidden="true">
+      <path fill="currentColor" d="M714.163 519.284L1160.89 0H1046.96L667.137 438.517L379.439 0H0L468.491 681.821L0 1226.37H113.933L516.518 761.621L820.561 1226.37H1200L714.137 519.284H714.163ZM570.695 699.457L521.701 628.828L155.347 79.6945H325.779L621.448 509.526L670.442 580.155L1047.57 1151.72H877.138L570.695 699.483V699.457Z"/>
+    </svg>
+  </a>
+</footer>
+
+</body>
+</html>
